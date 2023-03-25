@@ -1,5 +1,5 @@
 // npm modules
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Routes, Route, useNavigate, Navigate } from 'react-router-dom'
 
 // page components
@@ -7,6 +7,7 @@ import Signup from './pages/Signup/Signup'
 import Login from './pages/Login/Login'
 import Landing from './pages/Landing/Landing'
 import ChangePassword from './pages/ChangePassword/ChangePassword'
+import Filter from './components/Filter/Filter'
 
 // components
 import NavBar from './components/NavBar/NavBar'
@@ -14,12 +15,14 @@ import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
 
 // services
 import * as authService from './services/authService'
+import * as filterService from './services/filterService'
 
 // styles
 import './App.css'
 
 const App = () => {
   const [user, setUser] = useState(authService.getUser())
+  const [filters, setFilters] = useState([])
   const navigate = useNavigate()
 
   const handleLogout = () => {
@@ -32,11 +35,19 @@ const App = () => {
     setUser(authService.getUser())
   }
 
+  useEffect(() => {
+    const fetchAllFilters = async () => {
+      const filterData = await filterService.getAll()
+      setFilters(filterData)
+    }
+    fetchAllFilters()
+  }, [])
+
   return (
     <>
       <NavBar user={user} handleLogout={handleLogout} />
       <Routes>
-        <Route path="/" element={<Landing user={user} />} />
+        <Route path="/" element={<Landing user={user} filters={filters}/>} />
         <Route
           path="/signup"
           element={<Signup handleSignupOrLogin={handleSignupOrLogin} />}
@@ -53,6 +64,14 @@ const App = () => {
             </ProtectedRoute>
           }
         />
+        <Route 
+          path="/" 
+          element={<Filter
+          user={user}
+          filters={filters}
+                
+        />} 
+            />
       </Routes>
     </>
   )
