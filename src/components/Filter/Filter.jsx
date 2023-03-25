@@ -6,7 +6,6 @@ const Filter = props => {
   
   return (
     <>
-      <h1>Filter</h1>
       <div className={styles.container}>
         <h2>{props.filter.title}</h2>
       </div>
