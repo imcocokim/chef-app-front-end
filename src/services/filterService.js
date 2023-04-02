@@ -9,5 +9,16 @@ async function getAll() {
   return await res.json()
 }
 
+async function deleteFilter(filterId) {
+  const res = await fetch(`${BASE_URL}/${filterId}`, {
+    method: 'DELETE',
+    headers: {'Authorization': `Bearer ${tokenService.getToken()}`}
+  })
+  return await res.json()
+}
 
-export { getAll }
+
+export { 
+  getAll,
+  deleteFilter
+}

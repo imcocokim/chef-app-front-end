@@ -43,11 +43,16 @@ const App = () => {
     fetchAllFilters()
   }, [])
 
+  const handleDeleteFilter = async (id) => {
+    await filterService.deleteFilter(id)
+    setFilters(filters.filter(filter => filter._id !== id))
+  }
+
   return (
     <>
       <NavBar user={user} handleLogout={handleLogout} />
       <Routes>
-        <Route path="/" element={<Landing user={user} filters={filters}/>} />
+        <Route path="/" element={<Landing user={user} filters={filters} handleDeleteFilter={handleDeleteFilter}/>} />
         <Route
           path="/signup"
           element={<Signup handleSignupOrLogin={handleSignupOrLogin} />}
@@ -64,14 +69,6 @@ const App = () => {
             </ProtectedRoute>
           }
         />
-        <Route 
-          path="/" 
-          element={<Filter
-          user={user}
-          filters={filters}
-                
-        />} 
-            />
       </Routes>
     </>
   )

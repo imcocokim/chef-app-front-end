@@ -1,5 +1,3 @@
-import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
 import styles from './Filter.module.css'
 
 const Filter = props => {
@@ -8,6 +6,12 @@ const Filter = props => {
     <>
       <div className={styles.container}>
         <h2>{props.filter.title}</h2>
+        <button 
+        className={styles.buttons} 
+        onClick={() => props.handleDeleteFilter(props.filter._id)}
+        >
+          Delete
+        </button>
       </div>
     </>
   )
