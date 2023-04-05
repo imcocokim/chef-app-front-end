@@ -48,11 +48,24 @@ const App = () => {
     setFilters(filters.filter(filter => filter._id !== id))
   }
 
+  const handleEditFilterTitle = async (id, newTitle) => {
+    await filterService.editFilter(id, newTitle)
+  }
+
   return (
     <>
       <NavBar user={user} handleLogout={handleLogout} />
       <Routes>
-        <Route path="/" element={<Landing user={user} filters={filters} handleDeleteFilter={handleDeleteFilter}/>} />
+        <Route 
+        path="/" 
+        element={
+          <Landing 
+            user={user} 
+            filters={filters} 
+            handleDeleteFilter={handleDeleteFilter}
+            handleEditFilterTitle={handleEditFilterTitle}
+          />} 
+        />
         <Route
           path="/signup"
           element={<Signup handleSignupOrLogin={handleSignupOrLogin} />}

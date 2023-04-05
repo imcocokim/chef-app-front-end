@@ -17,11 +17,11 @@ async function deleteFilter(filterId) {
   return await res.json()
 }
 
-async function editFilter(obj, filterId) {
+async function editFilter(newTitle, filterId) {
   const res = await fetch(`${BASE_URL}/${filterId}`, {
     method: 'PUT',
     headers: {'Authorization': `Bearer ${tokenService.getToken()}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify(obj)
+    body: JSON.stringify(newTitle)
   })
   return await res.json()
 }
