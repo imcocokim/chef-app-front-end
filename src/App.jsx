@@ -16,6 +16,7 @@ import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
 // services
 import * as authService from './services/authService'
 import * as filterService from './services/filterService'
+import * as dishService from './services/dishService'
 
 // styles
 import './App.css'
@@ -23,6 +24,7 @@ import './App.css'
 const App = () => {
   const [user, setUser] = useState(authService.getUser())
   const [filters, setFilters] = useState([])
+  const [dishes, setDishes] = useState([])
   const navigate = useNavigate()
 
   const handleLogout = () => {
@@ -48,9 +50,13 @@ const App = () => {
     setFilters(filters.filter(filter => filter._id !== id))
   }
 
-  const handleEditFilterTitle = async (id, newTitle) => {
-    await filterService.editFilter(id, newTitle)
-  }
+  useEffect(() => {
+    const fetchAllDishes = async () => {
+      const dishData = await dishService.getAll()
+      setDishes(dishData)
+    }
+    fetchAllDishes()
+  }, [])
 
   return (
     <>
@@ -63,7 +69,7 @@ const App = () => {
             user={user} 
             filters={filters} 
             handleDeleteFilter={handleDeleteFilter}
-            handleEditFilterTitle={handleEditFilterTitle}
+            dishes={dishes}
           />} 
         />
         <Route
