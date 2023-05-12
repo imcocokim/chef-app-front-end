@@ -58,6 +58,13 @@ const App = () => {
     fetchAllDishes()
   }, [])
 
+  const handleAddDish = async dishData => {
+    const newDish = await dishService.create(dishData)
+    setDishes([...dishes, newDish])
+
+  }
+  
+
   return (
     <>
       <NavBar user={user} handleLogout={handleLogout} />
@@ -70,6 +77,7 @@ const App = () => {
             filters={filters} 
             handleDeleteFilter={handleDeleteFilter}
             dishes={dishes}
+            handleAddDish={handleAddDish}
           />} 
         />
         <Route
