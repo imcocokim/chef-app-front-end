@@ -21,4 +21,10 @@
   color: red;
   margin-left: 17rem;
   margin-bottom: 1rem;
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  outline: inherit;
 }

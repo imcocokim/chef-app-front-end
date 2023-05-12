@@ -58,11 +58,15 @@ const App = () => {
     fetchAllDishes()
   }, [])
 
-  const handleAddDish = async dishData => {
-    const newDish = await dishService.create(dishData)
-    setDishes([...dishes, newDish])
-
+  const handleAddDish = async (dishData) => {
+    try {
+      const newDish = await dishService.create(dishData)
+      setDishes([...dishes, newDish])
+    } catch (error) {
+      console.log(error)
+    }
   }
+  
   
 
   return (
@@ -78,6 +82,7 @@ const App = () => {
             handleDeleteFilter={handleDeleteFilter}
             dishes={dishes}
             handleAddDish={handleAddDish}
+            setDishes={setDishes}
           />} 
         />
         <Route

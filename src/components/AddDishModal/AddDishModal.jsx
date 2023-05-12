@@ -36,13 +36,14 @@ function AddDishModal({ closeModal, handleAddDish }) {
   const handleChange = (e) => {
     setFormData({...formData, [e.target.name]: e.target.value})
   }
-  
+
+
   return (
     <div className={styles.modalContainer}>
       <div className={styles.modalContent}>
         <button className={styles.exitButton} onClick={closeModal}>X</button>
         <form>
-          <label>
+          {/* <label>
             Favorite: 
             <input
               type='checkbox'
@@ -50,7 +51,7 @@ function AddDishModal({ closeModal, handleAddDish }) {
               value={formData.isFavorite}
               onChange={handleChange}
             />
-          </label>
+          </label> */}
           <label>
             Title: 
             <input
@@ -137,7 +138,7 @@ function AddDishModal({ closeModal, handleAddDish }) {
               onChange={handleChange}
             />
           </label>
-          <button>Create Dish</button>
+          <button onClick={() => handleAddDish(formData)}>Create Dish</button>
         </form>
       </div>
     </div>
