@@ -16,7 +16,7 @@ const DishDetailsModal = (props) => {
 
   const handleDeleteClick = async (id) => {
     const deletedDish = await dishService.deleteDish(id)
-    props.setDishes(props.dishes.filter(dish => dish._id !==deletedDish._id))
+    props.setDishes(props.dishes.filter(dish => dish._id !== deletedDish._id))
   }
 
   return (
@@ -36,7 +36,7 @@ const DishDetailsModal = (props) => {
           {props.dish.filters?.map((filter) => filter && filter.title)}
         </p>
         {/* <button onClick={handleEditClick}>Edit</button> */}
-        <button onClick={handleDeleteClick}>Delete</button>
+        <button onClick={() => handleDeleteClick(props.dish._id)}>Delete</button>
       </div>
       {/* {isEditModalVisible && (
         <EditDishModal
